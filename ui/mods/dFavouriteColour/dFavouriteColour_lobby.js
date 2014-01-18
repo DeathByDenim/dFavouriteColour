@@ -32,13 +32,13 @@ if(myprimarycolour)
 	handlers.army_state = function (armies) {
 		oldarmy_state(armies);
 
-		if(!colourchoosingenabled || infinitelooppreventcounter > 24)
+		if(!colourchoosingenabled || infinitelooppreventcounter > 30)
 			return;
 
 		// No point in trying to select the colour if it's already in use.
 		var colour_already_in_use = false;
 		for(var i = 0; i < armies.length; ++i) {
-			if(armies[i].primary_color == myprimarycolour) {
+			if(i != my_army_index && armies[i].primary_color == myprimarycolour) {
 				colour_already_in_use = true;
 				break;
 			}
@@ -47,17 +47,23 @@ if(myprimarycolour)
 		if(colour_already_in_use)
 			return;
 
+		if(my_army_index >= 0)
+			console.log('dFav:', armies[my_army_index].primary_color, armies[my_army_index].secondary_color);
+
 		// army_state is sometimes called twice. So check if one of the colours actually changed
-		if(my_army_index >= 0 && armies[my_army_index].primary_color != previousprimarycolour && armies[my_army_index].secondary_color != previoussecondarycolour) {
+		if(my_army_index >= 0 && (armies[my_army_index].primary_color != previousprimarycolour || armies[my_army_index].secondary_color != previoussecondarycolour)) {
+			previousprimarycolour = armies[my_army_index].primary_color;
+			previoussecondarycolour = armies[my_army_index].secondary_color;
+
 			// Set the first colour by sending "next_primary_color" to the server until the desired colour has been obtained.
 			if(armies[my_army_index].primary_color != myprimarycolour) {
-				previousprimarycolour = armies[my_army_index].primary_color;
 				model.send_message('next_primary_color');
+				console.log('dFav:', 'next_primary_color');
 			}
 			// Set the second colour by sending "next_secondary_color" to the server until the desired colour has been obtained.
 			else if(mysecondarycolour && armies[my_army_index].secondary_color != mysecondarycolour) {
-				previousprimarycolour = armies[my_army_index].secondary_color;
 				model.send_message('next_secondary_color');
+				console.log('dFav:', 'next_secondary_color');
 			}
 
 			infinitelooppreventcounter++;
