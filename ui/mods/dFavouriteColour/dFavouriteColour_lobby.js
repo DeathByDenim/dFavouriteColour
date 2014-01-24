@@ -1,16 +1,13 @@
 (function() {
 
-console.log('dFav: Setting initial settings');
 initialSettingValue('dFavouriteColour_primary', 'RANDOM');
 initialSettingValue('dFavouriteColour_secondary', 'RANDOM');
 initialSettingValue('dFavouriteColour_primary_alternative', 'RANDOM');
 initialSettingValue('dFavouriteColour_secondary_alternative', 'RANDOM');
 
-console.log('dFav: Setting colours');
 var settings = decode(localStorage.settings);
 var myprimarycolour = dFavouriteColour_colourtable[settings['dFavouriteColour_primary']].colour;
 var mysecondarycolour = dFavouriteColour_colourtable[settings['dFavouriteColour_secondary']].colour;
-console.log('dFav: Done');
 
 var my_army_index = -1;
 var my_slot_index = -1;
@@ -23,9 +20,7 @@ var infinitelooppreventcounter = 0;
 
 if(myprimarycolour)
 {
-console.log('dFav: Defining function');
 	function colourAlreadyInUse(armies, colour) {
-		console.log('dFav, checking colour already in use', colour);
 		for(var i = 0; i < armies.length; ++i) {
 			if(i != my_army_index && armies[i].primary_color == colour) {
 				return true;
@@ -34,7 +29,6 @@ console.log('dFav: Defining function');
 		return false;
 	}
 
-console.log('dFav: Changing functions');
 	var oldjoin = model.join;
 	model.join = function (army_index, slot_index) {
 		oldjoin(army_index, slot_index);
@@ -49,19 +43,18 @@ console.log('dFav: Changing functions');
 	handlers.army_state = function (armies) {
 		oldarmy_state(armies);
 
+		if(my_army_index < 0)
+			return;
+
 		if(!colourchoosingenabled || infinitelooppreventcounter > 30)
 			return;
 
 		// No point in trying to select the colour if it's already in use.
-
 		if(colourAlreadyInUse(armies, myprimarycolour)) {
-			console.log('dFav already in use', myprimarycolour);
-
 			if(settings['dFavouriteColour_primary_alternative'] == 'RANDOM') {
 				return;
 			}
 			else {
-				console.log('dFav: Setting alternative colour');
 				myprimarycolour = dFavouriteColour_colourtable[settings['dFavouriteColour_primary_alternative']].colour;
 				mysecondarycolour = dFavouriteColour_colourtable[settings['dFavouriteColour_secondary_alternative']].colour;
 
@@ -70,10 +63,6 @@ console.log('dFav: Changing functions');
 				}
 			}
 		}
-		console.log('dFav: Passed!');
-
-		if(my_army_index >= 0)
-			console.log('dFav:', armies[my_army_index].primary_color, armies[my_army_index].secondary_color);
 
 		// army_state is sometimes called twice. So check if one of the colours actually changed
 		if(my_army_index >= 0 && (armies[my_army_index].primary_color != previousprimarycolour || armies[my_army_index].secondary_color != previoussecondarycolour)) {
@@ -83,12 +72,10 @@ console.log('dFav: Changing functions');
 			// Set the first colour by sending "next_primary_color" to the server until the desired colour has been obtained.
 			if(armies[my_army_index].primary_color != myprimarycolour) {
 				model.send_message('next_primary_color');
-				console.log('dFav:', 'next_primary_color');
 			}
 			// Set the second colour by sending "next_secondary_color" to the server until the desired colour has been obtained.
 			else if(mysecondarycolour && armies[my_army_index].secondary_color != mysecondarycolour) {
 				model.send_message('next_secondary_color');
-				console.log('dFav:', 'next_secondary_color');
 			}
 
 			infinitelooppreventcounter++;
