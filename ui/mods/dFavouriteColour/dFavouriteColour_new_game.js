@@ -20,7 +20,7 @@ function colourIsTaken(colour)
 	var armies = model.armies();
 	for(var a = 0; a < armies.length; a++)
 	{
-		var slots = armies[a].openSlots();
+		var slots = armies[a].slots();
 		for(var s = 0; s < slots.length; s++)
 		{
 			if(slots[s].primaryColor() === colour)
