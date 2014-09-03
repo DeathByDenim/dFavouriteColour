@@ -1,29 +1,37 @@
 {
-	"author" : "DeathByDenim",
-	"build" : "62443",
-	"category" : [ "ui" ],
-	"context" : "client",
-	"date" : "2014/03/06",
-	"description" : "Automatically selects your favourite colour in the lobby.",
-	"description_nl" : "Kiest automatisch uw favoriete kleur in de lobby.",
-	"description_de" : "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
-	"description_fr" : "Choisit automatiquement votre couleur préférée dans le foyer.",
-	"display_name" : "Favourite Colour",
-	"display_name_nl" : "Lievelingskleur",
-	"display_name_de" : "Lieblingsfarbe",
-	"display_name_fr" : "Couleur préférée",
-	"enabled" : true,
-	"forum" : "https://forums.uberent.com/threads/rel-favourite-colour-v1-2.55782/",
-	"icon" : "http://pamods.github.io/icons/dFavouriteColour.png",
-	"id" : "dFavouriteColour",
-	"identifier" : "com.pa.DeathByDenim.dFavouriteColour",
-	"priority" : 100,
-	"requires" : [ "rSettingsManager" ],
-	"scenes" : {
-		"new_game" : [ "coui://ui/mods/dFavouriteColour/dFavouriteColour_new_game.js" ],
-		"global_mod_list" : [ "coui://ui/mods/dFavouriteColour/dFavouriteColour_global.js" ],
-		"settings" : [ "coui://ui/mods/dFavouriteColour/dFavouriteColour_settings.js" ]
-	},
-	"signature" : "not yet implemented",
-	"version" : "1.4"
+    "author": "DeathByDenim",
+    "build": "71459",
+    "category": [
+        "ui"
+    ],
+    "context": "client",
+    "date": "2014/09/02",
+    "description": "Automatically selects your favourite colour in the lobby.",
+    "description_de": "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
+    "description_fr": "Choisit automatiquement votre couleur préférée dans le foyer.",
+    "description_nl": "Kiest automatisch uw favoriete kleur in de lobby.",
+    "display_name": "Favourite Colour",
+    "display_name_de": "Lieblingsfarbe",
+    "display_name_fr": "Couleur préférée",
+    "display_name_nl": "Lievelingskleur",
+    "enabled": true,
+    "forum": "https://forums.uberent.com/threads/rel-favourite-colour-v1-2.55782/",
+    "icon": "http://pamods.github.io/icons/dFavouriteColour.png",
+    "id": "dFavouriteColour",
+    "identifier": "com.pa.DeathByDenim.dFavouriteColour",
+    "priority": 100,
+    "scenes": {
+        "global_mod_list": [
+            "coui://ui/mods/dFavouriteColour/dFavouriteColour_global.js"
+        ],
+        "new_game": [
+            "coui://ui/mods/dFavouriteColour/dFavouriteColour_new_game.js"
+        ],
+        "settings": [
+            "coui://ui/mods/dFavouriteColour/dFavouriteColour_settings.js"
+        ]
+    },
+    "signature": "not yet implemented",
+    "version": "1.4.1",
+    "installpath": "/home/jarno/.local/Uber Entertainment/Planetary Annihilation/mods/com.pa.DeathByDenim.dFavouriteColour"
 }

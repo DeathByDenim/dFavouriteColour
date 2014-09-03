@@ -1,132 +1,86 @@
 (function() {
 
-initialSettingValue('dFavouriteColour_primary', 'RANDOM');
-initialSettingValue('dFavouriteColour_secondary', 'RANDOM');
-initialSettingValue('dFavouriteColour_primary_alternative', 'RANDOM');
-initialSettingValue('dFavouriteColour_secondary_alternative', 'RANDOM');
+	var myprimarycolour = undefined;
+	var mysecondarycolour = undefined;
+	var myaltprimarycolour = undefined;
+	var myaltsecondarycolour = undefined;
+	var infinite_loop_prevent_counter = 0;
+	var previoussecondarycolour = undefined;
 
-var settings = decode(localStorage.settings);
-var myprimarycolour = undefined;
-var mysecondarycolour = undefined;
-var myaltprimarycolour = undefined;
-var myaltsecondarycolour = undefined;
-var infinite_loop_prevent_counter = 0;
+	var myuberId = ko.observable('').extend({ session: 'uberId' })();
 
-if(settings['dFavouriteColour_primary'] !== 'RANDOM')
-	myprimarycolour = dFavouriteColour_colourtable[settings['dFavouriteColour_primary']].colour;
-if(settings['dFavouriteColour_secondary'] !== 'RANDOM')
-	mysecondarycolour = dFavouriteColour_colourtable[settings['dFavouriteColour_secondary']].colour;
-if(settings['dFavouriteColour_primary_alternative'] !== 'RANDOM')
-	myaltprimarycolour = dFavouriteColour_colourtable[settings['dFavouriteColour_primary_alternative']].colour;
-if(settings['dFavouriteColour_secondary_alternative'] !== 'RANDOM')
-	myaltsecondarycolour = dFavouriteColour_colourtable[settings['dFavouriteColour_secondary_alternative']].colour;
+	model.dFavouriteColour_enabled = true;
 
-var colourselectionenabled = true;
+	// Retrieve the favourite colours from the settings if they exist.
+	if(!_.isUndefined(api.settings.isSet('ui','dFavouriteColour_primary', true)) && api.settings.value('ui','dFavouriteColour_primary') in dFavouriteColour_colourtable)
+		myprimarycolour = dFavouriteColour_colourtable[api.settings.value('ui','dFavouriteColour_primary')];
+	if(!_.isUndefined(api.settings.isSet('ui','dFavouriteColour_secondary', true)) && api.settings.value('ui','dFavouriteColour_secondary') in dFavouriteColour_colourtable)
+		mysecondarycolour = dFavouriteColour_colourtable[api.settings.value('ui','dFavouriteColour_secondary')];
+	if(!_.isUndefined(api.settings.isSet('ui','dFavouriteColour_primary_alternative', true)) && api.settings.value('ui','dFavouriteColour_primary_alternative') in dFavouriteColour_colourtable)
+		myaltprimarycolour = dFavouriteColour_colourtable[api.settings.value('ui','dFavouriteColour_primary_alternative')];
+	if(!_.isUndefined(api.settings.isSet('ui','dFavouriteColour_secondary_alternative', true)) && api.settings.value('ui','dFavouriteColour_secondary_alternative') in dFavouriteColour_colourtable)
+		myaltsecondarycolour = dFavouriteColour_colourtable[api.settings.value('ui','dFavouriteColour_secondary_alternative')];
 
-function colourIsTaken(colour)
-{
-	var armies = model.armies();
-	for(var a = 0; a < armies.length; a++)
-	{
-		var slots = armies[a].slots();
-		for(var s = 0; s < slots.length; s++)
+	// Manually choosing a colour should disable this mod temporarily.
+	var databindstring = $('.slot-color-primary-item').attr('data-bind');
+	databindstring = databindstring.replace('slot.colorIndex($index())', 'model.dFavouriteColour_enabled = false; slot.colorIndex($index())');
+	$('.slot-color-primary-item').attr('data-bind', databindstring);
+
+	var oldhandlersplayers = handlers.players;
+	handlers.players = function (payload, force) {
+		oldhandlersplayers(payload, force);
+		
+		if(infinite_loop_prevent_counter > 40)
 		{
-			if(slots[s].primaryColor() === colour)
-			{
-				// If the colour is taken by myself then it doesn't count
-				if(slots[s].playerName() === model.displayName())
-					return false;
-				else
-					return true;
+			console.log("Infinite loop detected");
+			return;
+		}
+
+		if(true/*model.dFavouriteColour_enabled*/) {
+			var myslot = undefined;
+
+			var armies = model.armies();
+			for(var i = 0; i < armies.length; i++) {
+				var slots = armies[i].slots();
+				for(var j = 0; j < slots.length; j++) {
+					if(slots[j].playerId() == myuberId) {
+						myslot = slots[j];
+						break;
+					}
+				}
+				if(!_.isUndefined(myslot))
+					break;
+			}
+
+			if(!_.isUndefined(myslot)) {
+				if(!_.isUndefined(myprimarycolour) && myslot.primaryColor() === myprimarycolour.colour) {
+					if(!_.isUndefined(mysecondarycolour) && myslot.secondaryColor() !== mysecondarycolour.colour && previoussecondarycolour !== myslot.secondaryColor()) {
+						previoussecondarycolour = myslot.secondaryColor();
+						model.send_message('next_secondary_color');
+						infinite_loop_prevent_counter++;
+					}
+				}
+				else if(!_.isUndefined(myaltprimarycolour) && myslot.primaryColor() === myaltprimarycolour.colour) {
+					if(!_.isUndefined(myprimarycolour) && !model.colors()[myprimarycolour.index].taken) {
+						model.send_message('set_primary_color_index', myprimarycolour.index);
+					}
+					else
+					{
+						if(!_.isUndefined(myaltsecondarycolour) && myslot.secondaryColor() !== myaltsecondarycolour.colour && previoussecondarycolour !== myslot.secondaryColor()) {
+							previoussecondarycolour = myslot.secondaryColor();
+							model.send_message('next_secondary_color');
+							infinite_loop_prevent_counter++;
+						}
+					}
+				}
+				else {
+					if(!_.isUndefined(myaltprimarycolour) )
+						model.send_message('set_primary_color_index', myaltprimarycolour.index);
+					if(!_.isUndefined(myprimarycolour))
+						model.send_message('set_primary_color_index', myprimarycolour.index);
+				}
 			}
 		}
 	}
-
-	return false;
-}
-
-var prev_primary_colour = undefined;
-var prev_secondary_colour = undefined;
-var oldhandlerplayers = handlers.players;
-handlers.players = function (payload, force) {
-	oldhandlerplayers(payload, force);
-
-	if(!colourselectionenabled)
-		return;
-
-	// Shouldn't happen, but you never know.
-	if(infinite_loop_prevent_counter > 50)
-		return;
-
-	// Bah, the user didn't even select a favourite colour.
-	if(myprimarycolour === undefined)
-		return;
-
-	var wantedprimarycolour = myprimarycolour;
-	var wantedsecondarycolour = mysecondarycolour;
-	if(colourIsTaken(myprimarycolour))
-	{
-		if(myaltprimarycolour === undefined)
-			return;
-
-		// It appears some fiend already took my colour! Try the alternative.
-		wantedprimarycolour = myaltprimarycolour;
-		wantedsecondarycolour = myaltsecondarycolour;
-		if(colourIsTaken(myaltprimarycolour))
-			return;
-	}
-
-	for(var i = 0; i < payload.length; i++)
-	{
-		if(payload[i].name == model.displayName())
-		{
-			var rgb_primary_colour = "rgb("+payload[i].color[0][0]+","+payload[i].color[0][1]+","+payload[i].color[0][2]+")";
-			var rgb_secondary_colour = "rgb("+payload[i].color[1][0]+","+payload[i].color[1][1]+","+payload[i].color[1][2]+")";
-
-			// Nothing changed. So don't do anything.
-			if(prev_primary_colour === rgb_primary_colour && prev_secondary_colour === rgb_secondary_colour)
-			{
-				console.log("dFav: Did something!");
-				break;
-			}
-
-			prev_primary_colour = rgb_primary_colour;
-			prev_secondary_colour = rgb_secondary_colour;
-
-			if(wantedprimarycolour !== rgb_primary_colour)
-			{
-				model.send_message('next_primary_color');
-				infinite_loop_prevent_counter++;
-			}
-			else if(wantedsecondarycolour !== undefined && wantedsecondarycolour !== rgb_secondary_colour)
-			{
-				model.send_message('next_secondary_color');
-				infinite_loop_prevent_counter++;
-			}
-
-			break;
-		}
-	}
-}
-
-var oldhandlerarmies = handlers.armies;
-handlers.armies= function (payload, force) {
-	oldhandlerarmies(payload, force);
-
-	if(!colourselectionenabled)
-		return;
-
-	// Modify the nextPrimaryColor and nextSecondaryColor function of the army to prevent this mod from interfering with manual colour selection.
-	_.forEach(model.armies(), function (element) {
-		element.nextPrimaryColor = function () {
-			colourselectionenabled = false;
-			model.send_message('next_primary_color');
-		};
-		element.nextSecondaryColor = function () {
-			colourselectionenabled = false;
-			model.send_message('next_secondary_color');
-		};
-	});
-}
 
 })();
