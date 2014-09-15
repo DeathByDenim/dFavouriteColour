@@ -33,10 +33,11 @@
 		if(infinite_loop_prevent_counter > 40)
 		{
 			console.log("Infinite loop detected");
+			model.dFavouriteColour_enabled = false;
 			return;
 		}
 
-		if(true/*model.dFavouriteColour_enabled*/) {
+		if(model.dFavouriteColour_enabled) {
 			var myslot = undefined;
 
 			var armies = model.armies();

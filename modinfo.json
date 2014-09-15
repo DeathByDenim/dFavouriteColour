@@ -1,11 +1,11 @@
 {
     "author": "DeathByDenim",
-    "build": "71459",
+    "build": "71937",
     "category": [
         "ui"
     ],
     "context": "client",
-    "date": "2014/09/02",
+    "date": "2014/09/15",
     "description": "Automatically selects your favourite colour in the lobby.",
     "description_de": "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
     "description_fr": "Choisit automatiquement votre couleur préférée dans le foyer.",
@@ -32,6 +32,5 @@
         ]
     },
     "signature": "not yet implemented",
-    "version": "1.4.1",
-    "installpath": "/home/jarno/.local/Uber Entertainment/Planetary Annihilation/mods/com.pa.DeathByDenim.dFavouriteColour"
+    "version": "1.4.2",
 }
