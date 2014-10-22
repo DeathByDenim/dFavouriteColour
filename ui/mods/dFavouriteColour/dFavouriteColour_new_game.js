@@ -7,7 +7,7 @@
 	var infinite_loop_prevent_counter = 0;
 	var previoussecondarycolour = undefined;
 
-	var myuberId = ko.observable('').extend({ session: 'uberId' })();
+	var myuberDisplayName = ko.observable('').extend({ session: 'displayName' })();
 
 	model.dFavouriteColour_enabled = true;
 
@@ -44,7 +44,7 @@
 			for(var i = 0; i < armies.length; i++) {
 				var slots = armies[i].slots();
 				for(var j = 0; j < slots.length; j++) {
-					if(slots[j].playerId() == myuberId) {
+					if(slots[j].playerName() == myuberDisplayName) {
 						myslot = slots[j];
 						break;
 					}
