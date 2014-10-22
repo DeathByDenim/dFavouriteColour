@@ -1,11 +1,11 @@
 {
     "author": "DeathByDenim",
-    "build": "71937",
+    "build": "73939",
     "category": [
         "ui"
     ],
     "context": "client",
-    "date": "2014/09/15",
+    "date": "2014/10/22",
     "description": "Automatically selects your favourite colour in the lobby.",
     "description_de": "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
     "description_fr": "Choisit automatiquement votre couleur préférée dans le foyer.",
@@ -15,7 +15,7 @@
     "display_name_fr": "Couleur préférée",
     "display_name_nl": "Lievelingskleur",
     "enabled": true,
-    "forum": "https://forums.uberent.com/threads/rel-favourite-colour-v1-2.55782/",
+    "forum": "https://forums.uberent.com/threads/favourite-colour-v1-4-2-71937.63529/",
     "icon": "http://pamods.github.io/icons/dFavouriteColour.png",
     "id": "dFavouriteColour",
     "identifier": "com.pa.DeathByDenim.dFavouriteColour",
@@ -32,6 +32,4 @@
         ]
     },
     "signature": "not yet implemented",
-    "version": "1.4.2",
-    "installpath": "/home/jarno/.local/Uber Entertainment/Planetary Annihilation/mods/com.pa.DeathByDenim.dFavouriteColour"
-}
+    "version": "1.4.3"}
