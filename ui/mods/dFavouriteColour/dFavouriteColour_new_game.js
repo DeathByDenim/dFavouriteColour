@@ -3,6 +3,7 @@
 	var myprimarycolour = undefined;
 	var myaltprimarycolour = undefined;
 	var infinite_loop_prevent_counter = 0;
+	var ignore_next_one = false;
 	var previoussecondarycolour = undefined;
 
 	var myuberDisplayName = ko.observable('').extend({ session: 'displayName' })();
@@ -23,18 +24,29 @@
 	var oldhandlersplayers = handlers.players;
 	handlers.players = function (payload, force) {
 		oldhandlersplayers(payload, force);
-		
-		if(infinite_loop_prevent_counter > 40) {
+
+		if(ignore_next_one)
+		{
+			ignore_next_one = false;
+			return;
+		}
+
+		if(infinite_loop_prevent_counter > 20) {
 			console.log("Infinite loop detected");
 			model.dFavouriteColour_enabled = false;
 			return;
 		}
 
 		if(model.dFavouriteColour_enabled) {
-			if(!_.isUndefined(myaltprimarycolour) )
+			infinite_loop_prevent_counter++;
+			if(!_.isUndefined(myaltprimarycolour) ) {
 				model.send_message('set_primary_color_index', myaltprimarycolour.index);
-			if(!_.isUndefined(myprimarycolour))
+				ignore_next_one = true;
+			}
+			if(!_.isUndefined(myprimarycolour)) {
 				model.send_message('set_primary_color_index', myprimarycolour.index);
+				ignore_next_one = true;
+			}
 		}
 	}
 

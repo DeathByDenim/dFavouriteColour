@@ -5,7 +5,7 @@
         "ui"
     ],
     "context": "client",
-    "date": "2014/11/06",
+    "date": "2014/11/18",
     "description": "Automatically selects your favourite colour in the lobby.",
     "description_de": "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
     "description_fr": "Choisit automatiquement votre couleur préférée dans le foyer.",
@@ -35,8 +35,5 @@
         ]
     },
     "signature": "not yet implemented",
-    "version": "1.5",
-    "installpath": "/home/jarno/.local/Uber Entertainment/Planetary Annihilation/mods/com.pa.DeathByDenim.dFavouriteColour",
-    "content_id": "com.pa.DeathByDenim.dFavouriteColour",
-    "store_id": "com.pahub.content.plugin.store.mod.client"
+    "version": "1.5.1"
 }
