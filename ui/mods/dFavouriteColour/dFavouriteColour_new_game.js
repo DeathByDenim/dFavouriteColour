@@ -31,7 +31,7 @@
 			return;
 		}
 
-		if(infinite_loop_prevent_counter > 20) {
+		if(infinite_loop_prevent_counter > 40) {
 			console.log("Infinite loop detected");
 			model.dFavouriteColour_enabled = false;
 			return;
