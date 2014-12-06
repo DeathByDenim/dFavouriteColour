@@ -1,11 +1,11 @@
 {
     "author": "DeathByDenim",
-    "build": "74525",
+    "build": "75817",
     "category": [
         "ui"
     ],
     "context": "client",
-    "date": "2014/11/18",
+    "date": "2014/12/06",
     "description": "Automatically selects your favourite colour in the lobby.",
     "description_de": "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
     "description_fr": "Choisit automatiquement votre couleur préférée dans le foyer.",
@@ -35,5 +35,5 @@
         ]
     },
     "signature": "not yet implemented",
-    "version": "1.5.1"
+    "version": "1.6"
 }
