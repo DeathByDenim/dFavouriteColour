@@ -43,12 +43,6 @@
 	handlers.players = function (payload, force) {
 		oldhandlersplayers(payload, force);
 
-		if(ignore_next_one)
-		{
-			ignore_next_one = false;
-			return;
-		}
-
 		if(model.dFavouriteColour_enabled) {
 			if(infinite_loop_prevent_counter > 40) {
 				console.log("Infinite loop detected");
@@ -57,20 +51,59 @@
 			}
 			infinite_loop_prevent_counter++;
 
-			if(!_.isUndefined(myaltprimarycolour) ) {
-				ignore_next_one = true;
+			var myslot = undefined;
+			var primarycolourtaken = false;
+			var altprimarycolourtaken = false;
 
-				model.send_message('set_primary_color_index', myaltprimarycolour.primary_index);
-				if(!_.isUndefined(myaltprimarycolour) ) {
-					model.send_message('set_secondary_color_index', myaltsecondarycolour.secondary_index);
+			var armies = model.armies();
+			for(var i = 0; i < armies.length; i++) {
+				var slots = armies[i].slots();
+				for(var j = 0; j < slots.length; j++) {
+					if(slots[j].playerName() === myuberDisplayName) {
+						myslot = slots[j];
+						break;
+					}
+					else if(!_.isUndefined(myprimarycolour) && slots[j].primaryColor() === myprimarycolour.colour) {
+						primarycolourtaken = true;
+					}
+					else if(!_.isUndefined(myaltprimarycolour) && slots[j].primaryColor() === myaltprimarycolour.colour) {
+						altprimarycolourtaken = true;
+					}
 				}
 			}
-			if(!_.isUndefined(myprimarycolour)) {
-				ignore_next_one = true;
 
+			if(_.isUndefined(myslot))
+				return;
+
+			if(!_.isUndefined(myprimarycolour) && myslot.primaryColor() !== myprimarycolour.colour && !primarycolourtaken)
+			{	// Set the primary colour
+				console.log("Setting primary colour");
 				model.send_message('set_primary_color_index', myprimarycolour.primary_index);
-				if(!_.isUndefined(myaltprimarycolour) ) {
-					model.send_message('set_secondary_color_index', mysecondarycolour.secondary_index);
+			}
+			else if( (_.isUndefined(myprimarycolour) || myslot.primaryColor() === myprimarycolour.colour) && myslot.secondaryColor() !== mysecondarycolour.colour)
+			{	// Set the secondary colour
+				var secondarycoloursforthisprimarycolour = model.secondaryColors(myslot);
+				var secondaryindex = secondarycoloursforthisprimarycolour.indexOf(mysecondarycolour.colour);
+				if(secondaryindex >= 0) {
+					console.log("Setting secondary colour");
+					model.send_message('set_secondary_color_index', secondaryindex);
+				}
+			}
+			else if(_.isUndefined(myprimarycolour) || (myslot.primaryColor() !== myprimarycolour.colour && primarycolourtaken) )
+			{	// If either the primary colour is not set or if it's already taken, then try the alternative
+				if(!_.isUndefined(myaltprimarycolour) && myslot.primaryColor() !== myaltprimarycolour.colour && !altprimarycolourtaken)
+				{	// Set the alternative primary colour
+					console.log("Setting alternative primary colour");
+					model.send_message('set_primary_color_index', myaltprimarycolour.primary_index);
+				}
+				else if( (_.isUndefined(myaltprimarycolour) || myslot.primaryColor() === myaltprimarycolour.colour) && myslot.secondaryColor() !== myaltsecondarycolour.colour)
+				{	// Set the alternative secondary colour
+					var secondarycoloursforthisprimarycolour = model.secondaryColors(myslot);
+					var secondaryindex = secondarycoloursforthisprimarycolour.indexOf(myaltsecondarycolour.colour);
+					if(secondaryindex >= 0) {
+						console.log("Setting alternative secondary colour");
+						model.send_message('set_secondary_color_index', secondaryindex);
+					}
 				}
 			}
 		}
