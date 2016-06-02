@@ -1,5 +1,23 @@
 (function() {
 
+	// Load the available colours from a copy of media/serverscripts/color_table.js
+	// which I cannot access directly, I think.
+	exports={};
+	loadScript('coui://ui/mods/dfavouritecolour/color_table.js');
+
+	// Convert it into a easy to use format with the colours in css form as
+	// well as get their indexes.
+	var i = 0;
+	var dFavouriteColour_colourtable = {};
+	_(colours).forEach(function(colour) {
+		var entry = {
+			colour: "rgb("+colour[0]+","+colour[1]+","+colour[2]+")",
+			primary_index: i
+		};
+		i++;
+		dFavouriteColour_colourtable[entry.colour] = entry;
+	}).value();
+
 	var myprimarycolour = undefined;
 	var mysecondarycolour = undefined;
 	var myaltprimarycolour = undefined;
@@ -10,6 +28,7 @@
 
 	var myuberDisplayName = ko.observable('').extend({ session: 'displayName' })();
 
+	// For manually selecting a colour or in case of errors.
 	model.dFavouriteColour_enabled = true;
 
 	// Retrieve the favourite colours from the settings if they exist.
@@ -21,7 +40,6 @@
 		myaltprimarycolour = dFavouriteColour_colourtable[api.settings.value('ui','dFavouriteColour_primary_alternative')];
 	if(!_.isUndefined(api.settings.isSet('ui','dFavouriteColour_secondary_alternative', true)) && api.settings.value('ui','dFavouriteColour_secondary_alternative') in dFavouriteColour_colourtable)
 		myaltsecondarycolour = dFavouriteColour_colourtable[api.settings.value('ui','dFavouriteColour_secondary_alternative')];
-
 
 	// Manually choosing a colour should disable this mod temporarily.
 	var databindstring = $('.slot-color-primary-item:first').attr('data-bind');
