@@ -1,11 +1,12 @@
 {
     "author": "DeathByDenim",
-    "build": "75817",
+    "build": "94684",
     "category": [
-        "ui"
+        "ui",
+        "titans"
     ],
     "context": "client",
-    "date": "2014/12/07",
+    "date": "2016/06/01",
     "description": "Automatically selects your favourite colour in the lobby.",
     "description_de": "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
     "description_fr": "Choisit automatiquement votre couleur préférée dans le foyer.",
@@ -18,22 +19,22 @@
     "forum": "https://forums.uberent.com/threads/favourite-colour-v1-4-2-71937.63529/",
     "icon": "http://pamods.github.io/icons/dFavouriteColour.png",
     "id": "dFavouriteColour",
-    "identifier": "com.pa.DeathByDenim.dFavouriteColour",
+    "identifier": "com.pa.deathbydenim.dfavouritecolour",
     "priority": 100,
     "scenes": {
         "global_mod_list": [
-            "coui://ui/mods/dFavouriteColour/dFavouriteColour_global.js"
+            "coui://ui/mods/dfavouritecolour/dfavouritecolour_global.js"
         ],
         "new_game_ladder": [
-            "coui://ui/mods/dFavouriteColour/dFavouriteColour_new_game.js"
+            "coui://ui/mods/dfavouritecolour/dfavouritecolour_new_game.js"
         ],
         "new_game": [
-            "coui://ui/mods/dFavouriteColour/dFavouriteColour_new_game.js"
+            "coui://ui/mods/dfavouritecolour/dfavouritecolour_new_game.js"
         ],
         "settings": [
-            "coui://ui/mods/dFavouriteColour/dFavouriteColour_settings.js"
+            "coui://ui/mods/dfavouritecolour/dfavouritecolour_settings.js"
         ]
     },
     "signature": "not yet implemented",
-    "version": "1.6.1"
+    "version": "1.7"
 }
