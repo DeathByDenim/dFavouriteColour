@@ -22,9 +22,6 @@
     "identifier": "com.pa.deathbydenim.dfavouritecolour",
     "priority": 100,
     "scenes": {
-        "global_mod_list": [
-            "coui://ui/mods/dfavouritecolour/dfavouritecolour_global.js"
-        ],
         "new_game_ladder": [
             "coui://ui/mods/dfavouritecolour/dfavouritecolour_new_game.js"
         ],
