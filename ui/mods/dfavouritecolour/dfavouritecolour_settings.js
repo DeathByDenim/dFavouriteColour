@@ -52,7 +52,7 @@
 					if(el2.innerText !== 'RANDOM') {
 						el2.style.color = el2.innerText.trim();
 						el2.style.textShadow = '0px 0px 0px';
-						$(el2).parent().parent().css('background-color',el2.innerText.trim());
+						$(el2).parent().css('background-color',el2.innerText.trim());
 					}
 				});
 			});

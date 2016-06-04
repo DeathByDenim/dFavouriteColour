@@ -3,10 +3,11 @@
     "build": "94684",
     "category": [
         "ui",
-        "titans"
+        "titans",
+        "classic"
     ],
     "context": "client",
-    "date": "2016/06/01",
+    "date": "2016/06/04",
     "description": "Automatically selects your favourite colour in the lobby.",
     "description_de": "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
     "description_fr": "Choisit automatiquement votre couleur préférée dans le foyer.",
