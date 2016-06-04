@@ -3,7 +3,7 @@
 	loadScript('coui://ui/mods/dfavouritecolour/color_table.js');
 	var dFavouriteColour_colourtable=_.map(colours, function(colour) { return "rgb("+colour[0]+","+colour[1]+","+colour[2]+")"; });
 	dFavouriteColour_colourtable = ['RANDOM'].concat(dFavouriteColour_colourtable);
-	console.log(dFavouriteColour_colourtable);
+
 	_.extend(api.settings.definitions.ui.settings, {
 
 		dFavouriteColour_primary: {
@@ -45,14 +45,24 @@
 		'                            </div>\n'
 	);
 
-	window.setTimeout(
-		function(){$('.colours').find('.inner').each(function(n, el) {
-			$(el).children().find('.text').each(function(n2,el2) {
-				if(el2.innerText !== 'RANDOM') {
-					el2.style.backgroundColor=el2.innerText
+	window.setInterval(
+		function(){
+			$('.colours').find('.inner').each(function(n, el) {
+				$(el).children().find('.text').each(function(n2,el2) {
+					if(el2.innerText !== 'RANDOM') {
+						el2.style.color = el2.innerText.trim();
+						el2.style.textShadow = '0px 0px 0px';
+						$(el2).parent().parent().css('background-color',el2.innerText.trim());
+					}
+				});
+			});
+			$('.colours').find('.btn-group').each(function(n,el) {
+				if(el.innerText.trim() !== 'RANDOM') {
+					el.style.color = el.innerText.trim();
+					el.style.backgroundColor=el.innerText.trim();
 				}
 			});
-		})}
+		}
 		,
 		1000
 	);
