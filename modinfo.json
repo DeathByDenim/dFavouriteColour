@@ -20,7 +20,7 @@
     "forum": "https://forums.uberent.com/threads/favourite-colour-v1-4-2-71937.63529/",
     "icon": "http://pamods.github.io/icons/dFavouriteColour.png",
     "id": "dFavouriteColour",
-    "identifier": "com.pa.deathbydenim.dfavouritecolour",
+    "identifier": "com.pa.DeathByDenim.dFavouriteColour",
     "priority": 100,
     "scenes": {
         "new_game_ladder": [
