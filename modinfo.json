@@ -1,13 +1,17 @@
 {
     "author": "DeathByDenim",
-    "build": "94684",
+    "build": "113953",
     "category": [
         "ui",
         "titans",
-        "classic"
+        "classic",
+        "favourite",
+        "favorite",
+        "colour",
+        "color"
     ],
     "context": "client",
-    "date": "2016/06/04",
+    "date": "2020-01-25",
     "description": "Automatically selects your favourite colour in the lobby.",
     "description_de": "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
     "description_fr": "Choisit automatiquement votre couleur préférée dans le foyer.",
@@ -16,12 +20,9 @@
     "display_name_de": "Lieblingsfarbe",
     "display_name_fr": "Couleur préférée",
     "display_name_nl": "Lievelingskleur",
-    "enabled": true,
     "forum": "https://forums.uberent.com/threads/favourite-colour-v1-4-2-71937.63529/",
     "icon": "http://pamods.github.io/icons/dFavouriteColour.png",
-    "id": "dFavouriteColour",
-    "identifier": "com.pa.DeathByDenim.dFavouriteColour",
-    "priority": 100,
+    "identifier": "com.pa.deathbydenim.dfavouritecolour",
     "scenes": {
         "new_game_ladder": [
             "coui://ui/mods/dfavouritecolour/dfavouritecolour_new_game.js"
@@ -34,5 +35,5 @@
         ]
     },
     "signature": "not yet implemented",
-    "version": "1.7"
+    "version": "1.7.1"
 }

@@ -77,7 +77,7 @@
 			for(var i = 0; i < armies.length; i++) {
 				var slots = armies[i].slots();
 				for(var j = 0; j < slots.length; j++) {
-					if(slots[j].playerName() === myuberDisplayName) {
+					if(slots[j].containsThisPlayer()) {
 						myslot = slots[j];
 						break;
 					}
