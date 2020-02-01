@@ -22,7 +22,7 @@
     "display_name_nl": "Lievelingskleur",
     "forum": "https://forums.uberent.com/threads/favourite-colour-v1-4-2-71937.63529/",
     "icon": "http://pamods.github.io/icons/dFavouriteColour.png",
-    "identifier": "com.pa.deathbydenim.dfavouritecolour",
+    "identifier": "com.pa.DeathByDenim.dFavouriteColour",
     "scenes": {
         "new_game_ladder": [
             "coui://ui/mods/dfavouritecolour/dfavouritecolour_new_game.js"
