@@ -1,6 +1,6 @@
 {
     "author": "DeathByDenim",
-    "build": "113953",
+    "build": "120679",
     "category": [
         "ui",
         "titans",
@@ -11,7 +11,7 @@
         "color"
     ],
     "context": "client",
-    "date": "2020-01-25",
+    "date": "2024-04-20",
     "description": "Automatically selects your favourite colour in the lobby.",
     "description_de": "Wählt automatisch Ihre Lieblingsfarbe in der Lobby aus.",
     "description_fr": "Choisit automatiquement votre couleur préférée dans le foyer.",
@@ -35,5 +35,5 @@
         ]
     },
     "signature": "not yet implemented",
-    "version": "1.7.1"
+    "version": "1.7.2"
 }
