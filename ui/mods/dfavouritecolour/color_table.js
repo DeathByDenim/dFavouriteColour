@@ -1,5 +1,3 @@
-//var _ = require('thirdparty/lodash');
-
 function rgbToHsv( r,g,b )
 {
     r = r / 255;
@@ -33,44 +31,62 @@ function shvColourSort(colours) {
     return result;
 }
 
-var                 uberRed = [210, 50, 44];
-var                uberPink = [206, 51,122];
-var              uberPurple = [113, 52,165];
-var            uberDarkBlue = [ 59, 54,182];
-var          uberMediumBlue = [ 51,151,197];
-var               uberGreen = [ 83,119, 48];
-var              uberYellow = [219,217, 37];
-var               uberBrown = [142,107, 68];
-var              uberOrange = [255,144, 47];
-var           uberLightGray = [200,200,200];
-var            uberDarkGray = [ 70, 70, 70];
+var uberBrown = [142, 107, 68];
+var AnonChocolateSpice = [74, 43, 0];
+var sadleBrownCSS3x11 = [139, 69, 19];
+var Red = [255, 0, 0];
+var DarkRed = [128, 0, 0];
+var AnonBloodOrange = [161, 59, 59];
+var uberOrange = [255, 120, 47];
+var Yellowish = [255, 200, 0];
+var Gold = [139, 128, 0];
+var Yellow = [255, 255, 0];
+var Cyan = [0, 255, 255];
+var NikAquamarine = [127, 255, 212];
+var Black = [50, 50, 50];           
+var uberDarkGray = [70, 70, 70];
+var Gray = [128, 128, 128];
+var mediumGray = [164, 164, 164];
+var White = [215, 215, 215];     
+var Purple = [160, 32, 240];
+var Violet = [128, 0, 255];
+var Indigo = [75, 0, 130];
+var AnonPurpleCandy = [84, 44, 94];
+var Blue = [10, 10, 180];
+var uberDarkBlue = [59, 54, 182];          
+var Navy = [22, 52, 102];               
+var Azure = [0, 128, 255];             
+var FadedBlue = [54, 78, 102];          
+var uberMediumBlue = [51, 151, 197];        
+var cornflowerBlueCSS3x11 = [100, 149, 237];
+var powderBlueCSS3x11 = [176,224,230];
+var mediumPurpleCSS3x11 = [147, 122, 219];
+var Teal = [0, 128, 128];
+var AnonCamoGreen = [72, 89, 61];
+var AnonGreenApple = [50, 184, 50];
+var Lime = [0, 255, 0];
+var DarkGreen = [0, 128, 0];
+var MediumSeaGreen = [0, 255, 128];
+var LightSeaGreen = [32, 178, 170];
+var MediumSpringGreen = [0, 250, 154];
+var LawnGreen = [124, 252, 0];
+var YellowGreen = [154, 205, 50];
+var Khaki = [240, 230, 140];
+var LightYellow = [255, 255, 224];
+var PeachPuff = [255, 218, 185];
+var LightPink = [255, 182, 193];
+var LightSalmon = [255, 160, 122];
+var Salmon = [250, 128, 114];
+var Tomato = [255, 99, 71];
+var RedOrange = [255, 69, 0];
+var MediumVioletRed = [199, 21, 133];
+var Magenta = [255, 0, 255];
+var Orchid = [218, 112, 214];
+var hotPinkCSS3x11 = [255, 105, 180];
+var uberLightGray = [200,200,200];
 
-var uberColours = [uberRed, uberPink, uberPurple, uberDarkBlue, uberMediumBlue, uberGreen, uberYellow, uberBrown, uberOrange, uberLightGray, uberDarkGray];
 
-var              redCSS3x11 = [255,  0,  0];
-var   magentaFuchsiaCSS3x11 = [255,  0,255];
-var             blueCSS3x11 = [  0,  0,255];
-var             limeCSS3x11 = [  0,255,  0];
-var             aquaCSS3x11 = [  0,255,255];
-var             tealCSS3x11 = [  0,128,128];
-var           maroonCSS3x11 = [128,  0,  0];
-var           purpleCSS3x11 = [128,  0,128];
-var         deepPinkCSS3x11 = [255, 20,147];
-var          hotPinkCSS3x11 = [255,105,180];
-var     mediumPurpleCSS3x11 = [147,122,219];
-var       powderBlueCSS3x11 = [176,224,230];
-var   cornflowerBlueCSS3x11 = [100,149,237];
-var        paleGreenCSS3x11 = [151,251,152];
-var              tanCSS3x11 = [210,180,140];
-var      lightSalmonCSS3x11 = [255,160,122];
-var     mediumOrchidCSS3x11 = [186, 85,211];
-var       sadleBrownCSS3x11 = [139, 69, 19];
-var     darkSeaGreenCSS3x11 = [143,188,143];
-var        darkGreenCSS3x11 = [  0,100,  0];
-var             pinkCSS3x11 = [255,192,203];
-var        lightPinkCSS3x11 = [255,182,193];
-
-var CSS3x11colours = [maroonCSS3x11, redCSS3x11,  hotPinkCSS3x11, deepPinkCSS3x11, magentaFuchsiaCSS3x11, mediumPurpleCSS3x11, tealCSS3x11, darkSeaGreenCSS3x11, darkGreenCSS3x11, aquaCSS3x11, limeCSS3x11, blueCSS3x11, powderBlueCSS3x11, cornflowerBlueCSS3x11, paleGreenCSS3x11, tanCSS3x11, purpleCSS3x11, mediumOrchidCSS3x11, lightSalmonCSS3x11, sadleBrownCSS3x11, pinkCSS3x11];
+var CSS3x11colours = [ uberBrown, AnonChocolateSpice, sadleBrownCSS3x11, Red, DarkRed, AnonBloodOrange, uberOrange, Yellowish, Gold, Yellow, Cyan, NikAquamarine, Black, uberDarkGray, Gray, mediumGray, White, Purple, Violet, Indigo, AnonPurpleCandy, Blue, Navy, uberDarkBlue, Azure, uberMediumBlue, cornflowerBlueCSS3x11, powderBlueCSS3x11, mediumPurpleCSS3x11, FadedBlue, Teal, AnonCamoGreen, AnonGreenApple, Lime, DarkGreen,  MediumSeaGreen, LightSeaGreen, MediumSpringGreen, LawnGreen, YellowGreen, Khaki, LightYellow, PeachPuff, LightPink, LightSalmon, Salmon, Tomato, RedOrange, MediumVioletRed, Magenta, Orchid, hotPinkCSS3x11 ];
 
 var brightnessAdjustment = 14/16;
 
@@ -90,7 +106,9 @@ CSS3x11colours = _.map(CSS3x11colours,function(colour) {
 });
 
 
-var colours = shvColourSort(uberColours.concat(CSS3x11colours));
+//var colours = shvColourSort(uberColours.concat(CSS3x11colours));
+
+var colours = CSS3x11colours;
 
 exports.data = _.map(colours, function(colour) {
     var result = { primary: colour, secondary: colours };
